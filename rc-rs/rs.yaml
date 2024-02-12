@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-test
+  labels:
+    purpose: learning
+  namespace: preprod
+spec:
+  replicas: 3
+  selector:
+     matchLabels: 
+       type: create
+  template:
+    metadata:
+      name: mynginx2-create
+      labels: 
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: nginx18
+        image: nginx:1.20.1
+        ports:
+        - containerPort: 80
+
