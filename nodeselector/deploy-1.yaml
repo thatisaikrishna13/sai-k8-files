@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-test-nodeselector-fail
+  labels:
+    purpose: learning
+  namespace: preprod
+spec:
+  replicas: 5
+  selector:
+     matchLabels:
+       type: create
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:latest
+        ports:
+        - containerPort: 80
+      nodeSelector:
+          tier: sai        

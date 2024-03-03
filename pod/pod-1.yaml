@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+ name: mynginx-tesing
+ labels:        
+    devops: '18' 
+    company: talent
+spec:
+  containers:        
+  - name: nginx18   
+    image: nginx:1.19.1
+    ports:
+    - containerPort: 80
+  nodeName: k8-worker1    

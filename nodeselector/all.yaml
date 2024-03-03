@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-test-nodeaffinity-all
+  labels:
+    purpose: learning
+  namespace: prod
+spec:
+  replicas: 4
+  selector:
+     matchLabels:
+       type: create
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: nginx
+        ports:
+        - containerPort: 80
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: batch
+                operator: In
+                values:
+                - 'tts'
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: use
+                  operator: In
+                  values:
+                  - testing
+      nodeSelector:
+        tier: web
+

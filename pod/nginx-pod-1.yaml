@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata: 
- name: mynginx2-apply
+ name: mynginx-taint-noschedule-test-toleration
  labels:        
     devops: '18' 
     company: talent
@@ -12,3 +12,10 @@ spec:
     image: nginx:1.14.1
     ports:
     - containerPort: 80 
+  nodeSelector:
+    tier: web
+  tolerations:
+  - key: "name"
+    operator: "Equal"
+    value: "devops"
+    effect: "NoSchedule"    
